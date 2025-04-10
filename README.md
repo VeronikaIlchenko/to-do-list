@@ -11,13 +11,9 @@ index.js -> start point of the App;
 package.json -> dependencies and scripts;
 
 ## How to run the project
-1. Download Node.js;
-2. Clone repo: 
-     'git clone https://github.com/yourusername/todo-app.git';
-3. Go to the folder where you saved project;
-4. run - npm install;
-5. run - npm start;
-6. project is run;
+1. run - npm install;
+2. run - npm start to run the project;
+
 
 ##Autor
 Veronika Ilchenko - vil.
