@@ -84,19 +84,19 @@ if(savedCompletedTodo) {
         
         <div className='todo-input-item'>
         <label>Title</label>
-        <input type="text" value={newTitle} onChange={(e)=>setNewTitle(e.target.value)} placeholder="Task title" />
+        <input type="text" value={newTitle} onChange={(e)=>setNewTitle(e.target.value)} placeholder="Task title" data-test-id="title-field" />
         </div>
         <div className='todo-input-item'>
         <label>Description</label>
-        <input type="text" value={newDescription} onChange={(e)=>setNewDescription(e.target.value)} placeholder="Task description" />
+        <input type="text" value={newDescription} onChange={(e)=>setNewDescription(e.target.value)} placeholder="Task description" data-test-id="task-description" />
         </div>
         <div className='todo-input-item'>
-        <button type="button" onClick={handleAddTodo} className='primaryBtn'>add</button>
+        <button type="button" onClick={handleAddTodo} className='primaryBtn' data-test-id="add-button">add</button>
         </div>
         </div>
         <div className='btn-area'>
-             <button className={`secondaryBtn ${isCompleteScreen===false && 'active'}`} onClick={()=>setIsCompleteScreen(false)}>ToDo</button>
-             <button className={`secondaryBtn ${isCompleteScreen===true && 'active'}`} onClick={()=>setIsCompleteScreen(true)}>Completed</button>
+             <button className={`secondaryBtn ${isCompleteScreen===false && 'active'}`} onClick={()=>setIsCompleteScreen(false)} data-test-id="todo-tab">ToDo</button>
+             <button className={`secondaryBtn ${isCompleteScreen===true && 'active'}`} onClick={()=>setIsCompleteScreen(true)} data-test-id="completed-tab">Completed</button>
         </div>
         <div className="todo-list">
           
@@ -109,8 +109,8 @@ if(savedCompletedTodo) {
         </div>
         
           <div className="todo-actions">
-            <AiOutlineDelete className="icon" onClick={()=>handleDeleteTodo(index)} title="Delete?"/>
-            <BsCheckCircle className="check-icon" onClick={()=>handleComplete(index)} title="Complete?"/>
+            <AiOutlineDelete className="icon" onClick={()=>handleDeleteTodo(index)} title="Delete?" data-test-id="delete-button"/>
+            <BsCheckCircle className="check-icon" onClick={()=>handleComplete(index)} title="Complete?" data-test-id="complete-button"/>
           </div>
           </div>
           )}
@@ -126,7 +126,7 @@ if(savedCompletedTodo) {
         </div>
         
           <div className="todo-actions">
-            <AiOutlineDelete className="icon" onClick={()=>handleDeleteCompletedTodo(index)} title="Delete?"/>
+            <AiOutlineDelete className="icon" onClick={()=>handleDeleteCompletedTodo(index)} title="Delete?" data-test-id="delete-button"/>
           </div>
           </div>
           )}
