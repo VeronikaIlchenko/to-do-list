@@ -77,7 +77,7 @@ if(savedCompletedTodo) {
 
   return (
     <div className="App">
-      <h1>My ToDo List</h1>
+      <h1 data-test-id="general-title">My ToDo List</h1>
 
       <div className='todo-wrapper'>
         <div className='todo-input'>
@@ -102,11 +102,11 @@ if(savedCompletedTodo) {
           
           {isCompleteScreen===false && allTodos.map((item, index) => {
             return(
-              <div className="todo-list-item" key={index}>
-        <div>
-        <h3>{item.title}</h3>
-        <p>{item.description}</p>
-        </div>
+              <div className="todo-list-item" key={index} data-test-id={`todo-list-item${index}`}>
+                <div>
+                <h3 data-test-id="title">{item.title}</h3>
+                <p data-test-id="description">{item.description}</p>
+                </div>
         
           <div className="todo-actions">
             <AiOutlineDelete className="icon" onClick={()=>handleDeleteTodo(index)} title="Delete?" data-test-id="delete-button"/>
@@ -120,13 +120,13 @@ if(savedCompletedTodo) {
             return(
               <div className="todo-list-item" key={index}>
         <div>
-        <h3>{item.title}</h3>
-        <p>{item.description}</p>
-        <p><small>Completed on:{item.completedOn}</small></p>
+        <h3 data-test-id="title">{item.title}</h3>
+        <p data-test-id="description">{item.description}</p>
+        <p><small data-test-id="completed-time">Completed on:{item.completedOn}</small></p>
         </div>
         
           <div className="todo-actions">
-            <AiOutlineDelete className="icon" onClick={()=>handleDeleteCompletedTodo(index)} title="Delete?" data-test-id="delete-button"/>
+            <AiOutlineDelete className="icon" onClick={()=>handleDeleteCompletedTodo(index)} title="Delete?" data-test-id="delete-completed-button"/>
           </div>
           </div>
           )}
