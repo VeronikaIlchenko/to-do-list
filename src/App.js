@@ -118,7 +118,7 @@ if(savedCompletedTodo) {
 
 {isCompleteScreen===true && completedTodos.map((item, index) => {
             return(
-              <div className="todo-list-item" key={index}>
+              <div className="todo-list-item" key={index} data-test-id={`completed-todo-list-item${index}`}>
         <div>
         <h3 data-test-id="title">{item.title}</h3>
         <p data-test-id="description">{item.description}</p>
