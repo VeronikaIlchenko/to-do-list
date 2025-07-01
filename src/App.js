@@ -79,8 +79,8 @@ if(savedCompletedTodo) {
 
   }, [])
 
-const handleEdit = (ind, item) => {
-   setCurrentEdit(ind)
+const handleEdit = (index, item) => {
+   setCurrentEdit(index)
    setCurrentEditedItem(item)
 }
 
