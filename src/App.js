@@ -100,6 +100,7 @@ const handleUpdateTodo = () => {
    const prevTodo = [...allTodos]
    prevTodo[currentEdit] = currentEditedItem;
    setTodos(prevTodo);
+   localStorage.setItem('todolist', JSON.stringify(prevTodo));
    setCurrentEdit('')
 }
 
