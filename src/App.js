@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsCheckCircle } from "react-icons/bs";
+import { AiOutlineEdit } from "react-icons/ai";
+
 
 
 function App() {
@@ -9,7 +11,9 @@ function App() {
   const[allTodos, setTodos] = useState([]);
   const[newTitle, setNewTitle]= useState('');
   const[newDescription, setNewDescription] = useState('')
-const [completedTodos, setCompletedTodos] = useState([])
+  const [completedTodos, setCompletedTodos] = useState([])
+  const [currentEdit, setCurrentEdit]= useState('');
+  const [currentEditedItem, setCurrentEditedItem] = useState('')
 
 
   const handleAddTodo = ()=>{
@@ -75,6 +79,31 @@ if(savedCompletedTodo) {
 
   }, [])
 
+const handleEdit = (index, item) => {
+   setCurrentEdit(index)
+   setCurrentEditedItem(item)
+}
+
+const handleUpdateTitle = (value) => {
+   setCurrentEditedItem((prev) => {
+    return {...prev,title:value}
+   })
+}
+
+const handleUpdateDescription = (value) => {
+   setCurrentEditedItem((prev) => {
+    return {...prev,description:value}
+   })
+}
+
+const handleUpdateTodo = () => {
+   const prevTodo = [...allTodos]
+   prevTodo[currentEdit] = currentEditedItem;
+   setTodos(prevTodo);
+   localStorage.setItem('todolist', JSON.stringify(prevTodo));
+   setCurrentEdit('')
+}
+
   return (
     <div className="App">
       <h1 data-test-id="general-title">My ToDo List</h1>
@@ -100,8 +129,17 @@ if(savedCompletedTodo) {
         </div>
         <div className="todo-list">
           
-          {isCompleteScreen===false && allTodos.map((item, index) => {
-            return(
+{isCompleteScreen===false && allTodos.map((item, index) => {
+            if (currentEdit===index) {
+                return (
+                  <div className='edit_wrapper' key={index}>
+                  <input placeholder='Updated Title' onChange={(e)=>handleUpdateTitle(e.target.value)} value={currentEditedItem.title} data-test-id="update-title-field" />
+                  <textarea placeholder='Updated Title' rows={4} onChange={(e)=>handleUpdateDescription(e.target.value)} value={currentEditedItem.description} data-test-id="update-description-field"/>
+                  <button type="button" onClick={handleUpdateTodo} className='primaryBtn' data-test-id="update-button">Update</button>
+                  </div>
+                )
+            } else {
+              return(
               <div className="todo-list-item" key={index} data-test-id={`todo-list-item${index}`}>
                 <div>
                 <h3 data-test-id="title">{item.title}</h3>
@@ -111,9 +149,12 @@ if(savedCompletedTodo) {
           <div className="todo-actions">
             <AiOutlineDelete className="icon" onClick={()=>handleDeleteTodo(index)} title="Delete?" data-test-id="delete-button"/>
             <BsCheckCircle className="check-icon" onClick={()=>handleComplete(index)} title="Complete?" data-test-id="complete-button"/>
+            <AiOutlineEdit className="icon" onClick={()=>handleEdit(index, item)} title="Edit?" data-test-id="edit-button"/>  
           </div>
           </div>
           )}
+            }
+            
           )}
 
 {isCompleteScreen===true && completedTodos.map((item, index) => {
